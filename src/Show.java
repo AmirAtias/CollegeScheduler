@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Show {
+public class Show {//show class
 private int id;
 private ArrayList <SlotDetails> allSlots;
 public Show(int id) {
