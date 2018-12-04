@@ -1,7 +1,7 @@
 
 import java.util.TreeMap;
 
-public class Course {
+public class Course {// course ..
 private double credits;
 private int courseCode;
 private int sizeOfShow;
