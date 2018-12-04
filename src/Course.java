@@ -1,7 +1,8 @@
 
 import java.util.TreeMap;
 
-public class Course {// course ...co
+
+public class Course { //course class
 private double credits;
 private int courseCode;
 private int sizeOfShow;
@@ -30,9 +31,9 @@ if(!allShows.containsKey(ShowId)){ //create new show
 	Show tempShow=new Show(ShowId);
     allShows.put(ShowId,tempShow);
 }
-	
+
 allShows.get(ShowId).addSlotDetails(tempSlot);
-	
+
 }
 public int getCourseCode() {
 	return courseCode;
