@@ -3,7 +3,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	private Model SchedulerModel = new Model();
+	private Model SchedulerModel = new Model();//create model
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
