@@ -16,11 +16,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class Controller  implements FinalsAndMsg,Days,Hours {
+public class Controller  implements FinalsAndMsg,Days,Hours { // the controller
 	Model theModel;
 	int schedulerCounter;
 	ArrayList<Course> allCourses;
-	private final int DEFAULT_VALUE = 0;
 	private TextField tfCourseName = new TextField();
 	private TextField tfCourseCode = new TextField();
 	private TextField tfCredits = new TextField();
