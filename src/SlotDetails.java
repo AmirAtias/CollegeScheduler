@@ -1,4 +1,4 @@
-public class SlotDetails {//slot class
+public class SlotDetails {
 	private String day;
 	private int startHour;
 	private int finishHour;
