@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
-public class Model {
-private ArrayList<Course> allCourses=new ArrayList<>();
+public class Model { 
+private ArrayList<Course> allCourses=new ArrayList<>();//all courses
 
 public ArrayList<Course> getAllCourses() {
 	return allCourses;
