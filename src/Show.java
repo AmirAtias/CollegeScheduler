@@ -1,28 +1,22 @@
-import java.util.ArrayList;
+
+import java.util.HashMap;
 
 public class Show {//show class
-private int id;
-private ArrayList <SlotDetails> allSlots;
-public Show(int id) {
-	setId(id);
-	allSlots=new ArrayList<>();
-}
-public int getId() {
-	return id;
-}
-public void setId(int id) {
-	this.id = id;
-}
-
-public ArrayList <SlotDetails> getShow() {
+private HashMap <Integer,Slot> allSlots;
+public HashMap<Integer, Slot> getAllSlots() {
 	return allSlots;
 }
-public void setShow(ArrayList <SlotDetails> show) {
-	this.allSlots = new ArrayList<>(show);
-	
+public void setAllSlots(HashMap<Integer, Slot> allSlots) {
+	this.allSlots = allSlots;
 }
-public void addSlotDetails(SlotDetails tempSlot){
-	allSlots.add(tempSlot);
+public Show() {
+	allSlots=new HashMap<>();
+}
+
+
+
+public void addSlotDetails(int slotId,Slot tempSlot){
+	allSlots.put(slotId,tempSlot);
 		
 }
 }

@@ -8,7 +8,7 @@ public interface Days {
 			this.value = value;
 		}
 
-		public int getValue() {
+		public int getIntValue() {
 			return value;
 		}
 	};

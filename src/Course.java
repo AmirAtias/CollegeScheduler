@@ -1,39 +1,31 @@
 
-import java.util.TreeMap;
-
+import java.util.HashMap;
 
 public class Course { //course class
 private double credits;
 private int courseCode;
-private int sizeOfShow;
 private String courseName;
-private TreeMap <Integer,Show>allShows=new TreeMap<>();
-public Course(double credits,int CourseCode,int sizeOfShow,String courseName) {
+private HashMap <Integer,Show>allShows;
+
+
+public Course(double credits,int CourseCode,String courseName) {
 	setCourseName(courseName);
 	setCourseCode(CourseCode);
 	setCredits(credits);
-	setSizeOfShow(sizeOfShow);
+	allShows=new HashMap<>();
 }
-public TreeMap <Integer,Show> getShows() {
-	return allShows;
-}
-public void setShows(TreeMap <Integer,Show> shows) {
-	this.allShows = shows;
-}
+
 public double getCredits() {
 	return credits;
 }
 public void setCredits(double credits) {
 	this.credits = credits;
 }
-public void addShow(int ShowId,SlotDetails tempSlot){
-if(!allShows.containsKey(ShowId)){ //create new show
-	Show tempShow=new Show(ShowId);
-    allShows.put(ShowId,tempShow);
+public void addShow(int showId,Show showForAdd){
+allShows.put(showId,showForAdd);
 }
-
-allShows.get(ShowId).addSlotDetails(tempSlot);
-
+public HashMap<Integer, Show> getAllShows() {
+	return allShows;
 }
 public int getCourseCode() {
 	return courseCode;
@@ -48,10 +40,5 @@ public String getCourseName() {
 public void setCourseName(String courseName) {
 	this.courseName = courseName;
 }
-public int getSizeOfShow() {
-	return sizeOfShow;
-}
-public void setSizeOfShow(int sizeOfShow) {
-	this.sizeOfShow = sizeOfShow;
-}
+
 }
