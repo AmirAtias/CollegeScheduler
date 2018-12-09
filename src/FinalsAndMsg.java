@@ -24,5 +24,9 @@ public interface FinalsAndMsg { // this interface contain all the finals and Str
     public String START_BIGGER_THEN_FINISH="start hour bigger then finish hour";
     public String ROOM_OCCUPIED_ERROR="this room is already occupied";
     public String LECTURE_TEACHING_ERROR="this lecture is already teaching in another class";
-    public String SLOT_NULL_EXCEPTION="for create a new show you should add at least 1 slot";
+    public String SHOW_NULL_EXCEPTION="for create a new show you should add at least 1 slot";
+    public String INPUT_NOT_VALID="Input not valid";
+    public String SUCCESSFUL="Successful";
+    public String SUCCESS_ADD_SLOT="slot added successfully";
+    public String SHOW_NULL="Show null exception";
 }

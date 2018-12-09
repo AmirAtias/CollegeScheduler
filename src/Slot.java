@@ -1,10 +1,5 @@
-<<<<<<< HEAD:src/SlotDetails.java
-public class SlotDetails {
-	private String day;
-=======
 public class Slot {//slot class
 	private int day;
->>>>>>> 1ccda9cfe741263291393b31093181342ddf5a35:src/Slot.java
 	private int startHour;
 	private int finishHour;
 	private String Room;

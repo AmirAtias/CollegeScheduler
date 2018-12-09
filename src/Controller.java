@@ -12,7 +12,7 @@ import exceptions.CourseNameException;
 import exceptions.SlotLectureException;
 import exceptions.SlotRoomException;
 import exceptions.SlotHoursException;
-import exceptions.SlotNullException;
+import exceptions.ShowNullException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +20,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -90,7 +92,7 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 	private void setPrimaryScene() {
 		primaryStage.setScene(primaryScene);
 		primaryStage.show(); // Display the stage
-		primaryStage.setAlwaysOnTop(true);
+		primaryStage.setAlwaysOnTop(false);
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("College Scheduler");
 		primaryStage.centerOnScreen();
@@ -204,24 +206,31 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 				createShow();
 			} catch (CourseNameException ex) {
 				if (!ex.getMessage().equals(MISSING_INPUT_ERROR)) {
-
+					showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
 					System.out.println(ex.getMessage());
 					tfCourseName.clear();
 				}
 			} catch (CourseCodeException ex) {
 				if (!ex.getMessage().equals(MISSING_INPUT_ERROR)) {
+					showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
 					System.out.println(ex.getMessage());
 					tfCourseCode.clear();
 				}
 			} catch (CourseCreditException ex) {
 				if (!ex.getMessage().equals(MISSING_INPUT_ERROR)) {
-
+					showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
 					System.out.println(ex.getMessage());
 					tfCredits.clear();
 				}
 			}
 		}
 
+	}
+	private void showAlert(String headerText,String contentText,AlertType type) {
+		Alert controllerAlert = new Alert(type);
+		controllerAlert.setHeaderText(headerText);
+		controllerAlert.setContentText(contentText);
+		controllerAlert.showAndWait();
 	}
 
 	private void createShow() {
@@ -280,6 +289,8 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 						Slot tmpSlot = new Slot(room, lecture, day, startHour, finishHour);
 						checkIfSlotExistAllCourses(tmpSlot);
 						tempShow.addSlotDetails(slotNum, tmpSlot);
+						showAlert(SUCCESSFUL,SUCCESS_ADD_SLOT,AlertType.CONFIRMATION);
+
 						tfLec.clear();// clear text fields and set default for combo box
 						tfRoom.clear();
 						daysComBox.setValue(Days.AllDays.Sunday);// set default
@@ -287,12 +298,12 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 						finishHourComBox.setValue(hoursObservableList().get(DEFAULT_VAL));// set default
 
 					} catch (SlotRoomException ex) {
-						System.out.println(ex.getMessage());
+						showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
 					} catch (SlotLectureException ex) {
-						System.out.println(ex.getMessage());
+						showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
 					} catch (SlotHoursException ex) {
-						System.out.println(ex.getMessage());
-
+						showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
+						
 					}
 				}
 			});
@@ -321,9 +332,9 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 				setPrimaryScene();
 				numOfShows=DEFAULT_VAL;
 			} else
-				throw new SlotNullException(SLOT_NULL_EXCEPTION);
-		} catch (SlotNullException ex) {
-			System.out.println(ex.getMessage());
+				throw new ShowNullException(SHOW_NULL_EXCEPTION);
+		} catch (ShowNullException ex) {
+			showAlert(SHOW_NULL,ex.getMessage(),AlertType.ERROR);
 		}
 	}
 
@@ -333,9 +344,9 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 				tmpCourse.addShow(NumOfShows, tempShow);
 				createShow();
 			} else
-				throw new SlotNullException(SLOT_NULL_EXCEPTION);
-		} catch (SlotNullException ex) {
-			System.out.println(ex.getMessage());
+				throw new ShowNullException(SHOW_NULL_EXCEPTION);
+		} catch (ShowNullException ex) {
+			showAlert(SHOW_NULL,ex.getMessage(),AlertType.ERROR);
 		}
 	}
 
