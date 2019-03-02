@@ -1,4 +1,4 @@
-public class Slot {//slot class
+public class Slot implements Days {//slot class
 	private int day;
 	private int startHour;
 	private int finishHour;
@@ -43,5 +43,27 @@ public class Slot {//slot class
 	public void setRoom(String room) {
 		Room = room;
 	}
+	public String getDayName() {
+		switch (day){
+		case 1:
+			return Days.AllDays.Sunday.name();
+		case 2:
+			return Days.AllDays.Monday.name();
+		case 3:
+			return Days.AllDays.Tuesday.name();
+		case 4:
+			return Days.AllDays.Wednesday.name();
+		case 5:
+			return Days.AllDays.Thursday.name();
+		case 6:
+			return Days.AllDays.Friday.name();
+		default:
+			return Days.AllDays.Saturday.name();
+		}
+	}
+@Override
+public String toString() {
+	return getDayName()+ ":"+ startHour+":00"+ " - "+ finishHour+":00";
+}
 
 }

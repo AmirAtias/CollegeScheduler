@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -41,7 +42,7 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 	private TextField tfCredits = new TextField();
 	protected Course tmpCourse;
 	protected Show tempShow;
-	private int NumOfShows = DEFAULT_VAL;
+	private int numOfShows = DEFAULT_VAL;
 	private String courseName;
 	private int courseCode;
 	private double credits;
@@ -54,7 +55,6 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 	private Button btCreateScheduler = new Button("create Scheduler");
 	private Button btCreateNewShow = new Button("create a new Show!");
 	private Button btDoneCreateCourse = new Button("done create course!");
-	private int numOfShows;
 	private InputCheckFunc checkInput;
 
 	public Controller(int schedulerCounter, Model schedulerModel, Stage primaryStage) {
@@ -67,6 +67,7 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 		checkInput = new InputCheckFunc();
 		setPrimaryScene();
 	}
+	
 
 	private Scene initPrimaryWindow() {
 		FlowPane pane = new FlowPane();
@@ -77,11 +78,23 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 		btAddCourse.setOnAction(e -> {
 			setCourseWindow();
 		});
-		// btView.setOnAction(e -> createNewView());
+		
+		btCreateScheduler.setOnAction(e -> createNewView());
 		Scene scene = new Scene(pane, 325, 75);
 		return scene;
 
 	}
+	// create view
+		private void createNewView() {
+			Stage stgView = new Stage();
+			SchedulerView view = new SchedulerView(schedulerModel);
+			Scene scene = new Scene(view, 2000,1000);
+			stgView.setScene(scene);
+			stgView.show();
+			stgView.setAlwaysOnTop(true);
+			stgView.setTitle("View");
+			
+		}
 
 	private void setCourseWindow() {
 		primaryStage.setTitle("add a new course");
@@ -206,19 +219,19 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 				createShow();
 			} catch (CourseNameException ex) {
 				if (!ex.getMessage().equals(MISSING_INPUT_ERROR)) {
-					showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
+					showAlert(INPUT_NOT_VALID, ex.getMessage(), AlertType.ERROR);
 					System.out.println(ex.getMessage());
 					tfCourseName.clear();
 				}
 			} catch (CourseCodeException ex) {
 				if (!ex.getMessage().equals(MISSING_INPUT_ERROR)) {
-					showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
+					showAlert(INPUT_NOT_VALID, ex.getMessage(), AlertType.ERROR);
 					System.out.println(ex.getMessage());
 					tfCourseCode.clear();
 				}
 			} catch (CourseCreditException ex) {
 				if (!ex.getMessage().equals(MISSING_INPUT_ERROR)) {
-					showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
+					showAlert(INPUT_NOT_VALID, ex.getMessage(), AlertType.ERROR);
 					System.out.println(ex.getMessage());
 					tfCredits.clear();
 				}
@@ -226,7 +239,8 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 		}
 
 	}
-	private void showAlert(String headerText,String contentText,AlertType type) {
+
+	private void showAlert(String headerText, String contentText, AlertType type) {
 		Alert controllerAlert = new Alert(type);
 		controllerAlert.setHeaderText(headerText);
 		controllerAlert.setContentText(contentText);
@@ -289,7 +303,7 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 						Slot tmpSlot = new Slot(room, lecture, day, startHour, finishHour);
 						checkIfSlotExistAllCourses(tmpSlot);
 						tempShow.addSlotDetails(slotNum, tmpSlot);
-						showAlert(SUCCESSFUL,SUCCESS_ADD_SLOT,AlertType.CONFIRMATION);
+						showAlert(SUCCESSFUL, SUCCESS_ADD_SLOT, AlertType.CONFIRMATION);
 
 						tfLec.clear();// clear text fields and set default for combo box
 						tfRoom.clear();
@@ -298,12 +312,12 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 						finishHourComBox.setValue(hoursObservableList().get(DEFAULT_VAL));// set default
 
 					} catch (SlotRoomException ex) {
-						showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
+						showAlert(INPUT_NOT_VALID, ex.getMessage(), AlertType.ERROR);
 					} catch (SlotLectureException ex) {
-						showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
+						showAlert(INPUT_NOT_VALID, ex.getMessage(), AlertType.ERROR);
 					} catch (SlotHoursException ex) {
-						showAlert(INPUT_NOT_VALID,ex.getMessage(),AlertType.ERROR);
-						
+						showAlert(INPUT_NOT_VALID, ex.getMessage(), AlertType.ERROR);
+
 					}
 				}
 			});
@@ -327,26 +341,26 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 	private void doneCreateCourse() {
 		try {
 			if (!(tempShow.getAllSlots().isEmpty())) {
-				tmpCourse.addShow(NumOfShows, tempShow);
+				tmpCourse.addShow(numOfShows, tempShow);
 				schedulerModel.addCourse(tmpCourse);
 				setPrimaryScene();
-				numOfShows=DEFAULT_VAL;
+				numOfShows = DEFAULT_VAL;
 			} else
 				throw new ShowNullException(SHOW_NULL_EXCEPTION);
 		} catch (ShowNullException ex) {
-			showAlert(SHOW_NULL,ex.getMessage(),AlertType.ERROR);
+			showAlert(SHOW_NULL, ex.getMessage(), AlertType.ERROR);
 		}
 	}
 
 	private void addAndCreateShow() {
 		try {
 			if (!(tempShow.getAllSlots().isEmpty())) {
-				tmpCourse.addShow(NumOfShows, tempShow);
+				tmpCourse.addShow(numOfShows, tempShow);
 				createShow();
 			} else
 				throw new ShowNullException(SHOW_NULL_EXCEPTION);
 		} catch (ShowNullException ex) {
-			showAlert(SHOW_NULL,ex.getMessage(),AlertType.ERROR);
+			showAlert(SHOW_NULL, ex.getMessage(), AlertType.ERROR);
 		}
 	}
 

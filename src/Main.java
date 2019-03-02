@@ -7,7 +7,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Controller schedulerController = new Controller(0, SchedulerModel, primaryStage);
+		Controller schedulerController = new Controller(0,SchedulerModel, primaryStage);
 
 	}
 

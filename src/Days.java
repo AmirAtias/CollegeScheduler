@@ -11,5 +11,7 @@ public interface Days {
 		public int getIntValue() {
 			return value;
 		}
-	};
-}
+		
+		}
+	}
+

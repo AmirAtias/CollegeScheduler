@@ -29,4 +29,7 @@ public interface FinalsAndMsg { // this interface contain all the finals and Str
     public String SUCCESSFUL="Successful";
     public String SUCCESS_ADD_SLOT="slot added successfully";
     public String SHOW_NULL="Show null exception";
+    public final int  MIN_HOUR=7;
+    public final int DAYS_SIZE=7;
+    public final int HOURS_SIZE=16;
 }
