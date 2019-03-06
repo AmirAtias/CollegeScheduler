@@ -1,10 +1,14 @@
 
-public class Hour {
-int hour;
-int courseCode;
-public Hour(int hour) {
+public class Hour implements FinalsAndMsg{
+private int hour;
+private int courseCode;
+private String courseName;
+private String room;
+public Hour(int hour)  {
 	this.hour=hour;
-	courseCode=-1;
+	courseCode=DEFAULT_NEG_VAL;
+	courseName=null;
+	room=null;
 }
 public int getHour() {
 	return hour;
@@ -17,6 +21,22 @@ public int getCourseCode() {
 }
 public void setCourseCode(int courseCode) {
 	this.courseCode = courseCode;
+}
+public String getCourseName() {
+	return courseName;
+}
+public void setCourseName(String courseName) {
+	this.courseName = courseName;
+}
+public String getRoom() {
+	return room;
+}
+public void setRoom(String room) {
+	this.room = room;
+}
+@Override
+public String toString() {
+	return courseName+" : " +courseCode+""	+ "- room: "+room;
 }
 
 }

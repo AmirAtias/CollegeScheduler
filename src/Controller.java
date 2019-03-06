@@ -3,8 +3,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
 import java.util.ListIterator;
 import exceptions.CourseCodeException;
 import exceptions.CourseCreditException;
@@ -18,12 +16,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBase;
+
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -67,7 +65,6 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 		checkInput = new InputCheckFunc();
 		setPrimaryScene();
 	}
-	
 
 	private Scene initPrimaryWindow() {
 		FlowPane pane = new FlowPane();
@@ -78,23 +75,23 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 		btAddCourse.setOnAction(e -> {
 			setCourseWindow();
 		});
-		
+
 		btCreateScheduler.setOnAction(e -> createNewView());
 		Scene scene = new Scene(pane, 325, 75);
 		return scene;
 
 	}
+
 	// create view
-		private void createNewView() {
-			Stage stgView = new Stage();
-			SchedulerView view = new SchedulerView(schedulerModel);
-			Scene scene = new Scene(view, 2000,1000);
-			stgView.setScene(scene);
-			stgView.show();
-			stgView.setAlwaysOnTop(true);
-			stgView.setTitle("View");
-			
-		}
+	private void createNewView() {
+		Stage stgView = new Stage();
+		SchedulerView view = new SchedulerView(schedulerModel);
+		Scene scene = new Scene(view, 2000, 1000);
+		stgView.setScene(scene);
+		stgView.show();
+		stgView.setTitle("View");
+
+	}
 
 	private void setCourseWindow() {
 		primaryStage.setTitle("add a new course");
@@ -319,6 +316,7 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 						showAlert(INPUT_NOT_VALID, ex.getMessage(), AlertType.ERROR);
 
 					}
+
 				}
 			});
 		}
@@ -368,7 +366,8 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 		return numOfShows;
 	}
 
-	private void checkIfSlotExistAllCourses(Slot slotForCheck) throws SlotLectureException, SlotRoomException {
+	private void checkIfSlotExistAllCourses(Slot slotForCheck)
+			throws SlotLectureException, SlotRoomException, SlotHoursException {
 		ListIterator<Course> it = allCourses.listIterator();
 		while (it.hasNext()) {
 			checkIfSlotExist(it.next(), slotForCheck, false);
@@ -377,7 +376,7 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 	}
 
 	private void checkIfSlotExist(Course courseForCheck, Slot slotForCheck, boolean checkTheNewShow)
-			throws SlotLectureException, SlotRoomException {
+			throws SlotLectureException, SlotRoomException, SlotHoursException {
 		if (courseForCheck.getAllShows() != null || checkTheNewShow) {// check if there is another slots
 			HashMap<Integer, Show> allShows = courseForCheck.getAllShows();
 			Set<Integer> keysSet = allShows.keySet();
@@ -407,6 +406,8 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 								throw new SlotLectureException(LECTURE_TEACHING_ERROR);
 							else if (tempSlot.getRoom().equals(slotForCheck.getRoom()))
 								throw new SlotRoomException(ROOM_OCCUPIED_ERROR);
+							if(currentShow==tempShow)//if check the new show
+							throw new SlotHoursException(THERE_IS_LECTURE);
 						}
 					}
 				}

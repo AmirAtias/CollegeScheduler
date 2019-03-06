@@ -1,7 +1,7 @@
 
 public class Day implements FinalsAndMsg{
 	int dayVal;
-	Hour[] hours=new Hour[17];
+	Hour[] hours=new Hour[HOURS_SIZE];
 	public Day(int dayVal) {
 		this.dayVal=dayVal;	
 				initHours();}
@@ -13,7 +13,15 @@ public class Day implements FinalsAndMsg{
 	public Hour getHour(int index) {
 		return hours[index-MIN_HOUR];
 	}
-public void setCourse(int index,int courseCode) {
+public void  removeCourse(int index) {
+	hours[index-MIN_HOUR].setCourseCode(DEFAULT_NEG_VAL);
+	hours[index-MIN_HOUR].setCourseName(null);
+	hours[index-MIN_HOUR].setRoom(null);
+}
+public void setCourse(int index,String courseName,int courseCode,String room) {
 	hours[index-MIN_HOUR].setCourseCode(courseCode);
+	hours[index-MIN_HOUR].setCourseName(courseName);
+	hours[index-MIN_HOUR].setRoom(room);
+
 }
 }
