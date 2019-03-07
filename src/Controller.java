@@ -86,7 +86,7 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 	private void createNewView() {
 		Stage stgView = new Stage();
 		SchedulerView view = new SchedulerView(schedulerModel);
-		Scene scene = new Scene(view, 2000, 1000);
+		Scene scene = new Scene(view, 1500, 600);
 		stgView.setScene(scene);
 		stgView.show();
 		stgView.setTitle("View");
@@ -217,19 +217,19 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 			} catch (CourseNameException ex) {
 				if (!ex.getMessage().equals(MISSING_INPUT_ERROR)) {
 					showAlert(INPUT_NOT_VALID, ex.getMessage(), AlertType.ERROR);
-					System.out.println(ex.getMessage());
+
 					tfCourseName.clear();
 				}
 			} catch (CourseCodeException ex) {
 				if (!ex.getMessage().equals(MISSING_INPUT_ERROR)) {
 					showAlert(INPUT_NOT_VALID, ex.getMessage(), AlertType.ERROR);
-					System.out.println(ex.getMessage());
+
 					tfCourseCode.clear();
 				}
 			} catch (CourseCreditException ex) {
 				if (!ex.getMessage().equals(MISSING_INPUT_ERROR)) {
 					showAlert(INPUT_NOT_VALID, ex.getMessage(), AlertType.ERROR);
-					System.out.println(ex.getMessage());
+
 					tfCredits.clear();
 				}
 			}
@@ -338,8 +338,9 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 
 	private void doneCreateCourse() {
 		try {
-			if (!(tempShow.getAllSlots().isEmpty())) {
-				tmpCourse.addShow(numOfShows, tempShow);
+			if (!(tempShow.getAllSlots().isEmpty())|| numOfShows>1) {
+				if(!(tempShow.getAllSlots().isEmpty()))
+				  tmpCourse.addShow(numOfShows, tempShow);
 				schedulerModel.addCourse(tmpCourse);
 				setPrimaryScene();
 				numOfShows = DEFAULT_VAL;
@@ -406,8 +407,8 @@ public class Controller implements FinalsAndMsg, Days { // the controller
 								throw new SlotLectureException(LECTURE_TEACHING_ERROR);
 							else if (tempSlot.getRoom().equals(slotForCheck.getRoom()))
 								throw new SlotRoomException(ROOM_OCCUPIED_ERROR);
-							if(currentShow==tempShow)//if check the new show
-							throw new SlotHoursException(THERE_IS_LECTURE);
+							if (currentShow == tempShow)// if check the new show
+								throw new SlotHoursException(THERE_IS_LECTURE);
 						}
 					}
 				}

@@ -11,6 +11,7 @@ import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -52,6 +53,8 @@ public class SchedulerView extends BorderPane implements FinalsAndMsg, Days {
 	private GridPane initBottomPane() {
 
 		GridPane bottomPane = new GridPane();
+		bottomPane.setHgap(20);
+		bottomPane.setPadding(new Insets(30,50,50,220));
 		chosenCourses = FXCollections.observableArrayList(new ArrayList<>());
 		cbAllCourses.getItems().addAll(allCourses);
 		cbChosenCourse.getItems().addAll(chosenCourses);
@@ -63,9 +66,9 @@ public class SchedulerView extends BorderPane implements FinalsAndMsg, Days {
 		bottomPane.add(cbAllShows, 1, 0);
 		bottomPane.add(cbAllSlots, 2, 0);
 		bottomPane.add(btChooseCourse, 3, 0);
-		bottomPane.add(new Label("chosen Courses"), 4, 0);
-		bottomPane.add(cbChosenCourse, 6, 0);
-		bottomPane.add(btRemoveCourse, 7, 0);
+		bottomPane.add(new Label("chosen Courses:"), 4, 0);
+		bottomPane.add(cbChosenCourse, 5, 0);
+		bottomPane.add(btRemoveCourse, 6, 0);
 		return bottomPane;
 	}
 

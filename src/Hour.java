@@ -36,7 +36,7 @@ public void setRoom(String room) {
 }
 @Override
 public String toString() {
-	return courseName+" : " +courseCode+""	+ "- room: "+room;
+	return courseName+" :  " +courseCode+"  "	+ "  - room:  "+room;
 }
 
 }
